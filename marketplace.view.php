@@ -800,6 +800,8 @@ class marketplaceView extends marketplace
 		$logged_info = Context::get('logged_info');
 		$oMarketplaceModel = getModel('marketplace');
 		$item_status = Context::get('item_status');
+		$category = Context::get('category');
+		$search_keyword = Context::get('search_keyword');
 
 		// check grant
 		if(!$logged_info) {
@@ -814,11 +816,13 @@ class marketplaceView extends marketplace
 		$args->module_srl = $this->module_srl;
 		$args->member_srl = $logged_info->member_srl;
 		$args->item_status = $item_status;
+		$args->category_srl = $category;
+		$args->search_keyword = $search_keyword;
 		$args->list_count = 5;
 		$args->page = Context::get('page');
 		$output = $oMarketplaceModel->getMarketplaceItemList($args);
 
-		Context::set('item_status', Context::get('item_status'));		
+		Context::set('item_status', Context::get('item_status'));
 		Context::set('marketitem_list', $output->data);
 		Context::set('total_page', $output->total_page);
 		Context::set('page', $output->page);
